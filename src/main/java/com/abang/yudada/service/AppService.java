@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 应用服务
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://www.code-nav.cn">编程导航学习圈</a>
  * AppService接口继承自MyBatis-Plus框架提供的IService接口，专门用于操作App实体。这个接口声明了几个方法，用于处理与App相关的业务逻辑。
  */
 public interface AppService extends IService<App> {
