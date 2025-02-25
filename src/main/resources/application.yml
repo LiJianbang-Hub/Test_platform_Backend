@@ -1,43 +1,22 @@
-# 公共配置文件
+# 线上配置文件
 # @author <a href="https://github.com/liyupi">程序员鱼皮</a>
-# @from <a href="https://yupi.icu">编程导航知识星球</a>
+# @from <a href="https://www.code-nav.cn">编程导航</a>
+server:
+  port: 8101
 spring:
-  application:
-    name: yudada-backend
-  # 默认 dev 环境
-  profiles:
-    active: dev
-  # 支持 swagger3
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  # session 配置
-  session:
-    # todo 取消注释开启分布式 session（须先配置 Redis）
-    # store-type: redis
-    # 30 天过期
-    timeout: 2592000
   # 数据库配置
-  # todo 需替换配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yudada
-    username: root
-    password: li123456
+    url: jdbc:mysql://{修改为你的数据库地址}/yudada
+    username: 修改为你的用户名
+    password: 修改为你的密码
   # Redis 配置
-  # todo 需替换配置，然后取消注释
   redis:
     database: 1
-    host: localhost
+    host: 修改为你的地址
     port: 6379
-    timeout: 5000
-  #    password: 123456
-  # 文件上传
-  servlet:
-    multipart:
-      # 大小限制
-      max-file-size: 10MB
-  # 分库分表配置
+    password: 修改为你的密码
+  # 分库分表配置（开源代码部署可忽略）
   shardingsphere:
     #数据源配置
     datasource:
@@ -46,9 +25,9 @@ spring:
       yudada:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/yudada
-        username: root
-        password: li123456
+        jdbc-url: jdbc:mysql://{修改为你的数据库地址}/yudada
+        username: 修改为你的用户名
+        password: 修改为你的密码
     # 规则配置
     rules:
       sharding:
@@ -68,43 +47,13 @@ spring:
               standard:
                 sharding-column: appId
                 sharding-algorithm-name: answer-table-inline
-server:
-  address: 0.0.0.0
-  port: 8102
-  servlet:
-    context-path: /api
-    # cookie 30 天过期
-    session:
-      cookie:
-        max-age: 2592000
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  global-config:
-    db-config:
-      logic-delete-field: isDelete # 全局逻辑删除的实体字段名
-      logic-delete-value: 1 # 逻辑已删除值（默认为 1）
-      logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）
-# 对象存储
-# todo 需替换配置
-cos:
-  client:
-    accessKey: xxx
-    secretKey: xxx
-    region: xxx
-    bucket: xxx
+    # 生产环境关闭日志
+    log-impl: ''
 # 接口文档配置
 knife4j:
-  enable: true
-  openapi:
-    title: "接口文档"
-    version: 1.0
-    group:
-      default:
-        api-rule: package
-        api-rule-resources:
-          - com.abang.yudada.controller
-#AI 配置
-ai:
-  apiKey: 03e6588b6ff555fd32b489658c2a5d32.g6ZwFUWwZz87xAnW
+  basic:
+    enable: true
+    username: 修改为你的用户名
+    password: 修改为你的密码
